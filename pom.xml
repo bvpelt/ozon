@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.2</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.bsoft</groupId>
+	<artifactId>ozon</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ozon</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>11</java.version>
+		<jackson-core.version>2.13.1</jackson-core.version>
+		<jts2geojson.version>0.16.1</jts2geojson.version>
+		<openapitools.version>5.1.1</openapitools.version>
+		<openapitools-jackson.version>0.2.2</openapitools-jackson.version>
+		<springfox-swagger2.version>3.0.0</springfox-swagger2.version>
+		<swagger-parser.version>2.0.29</swagger-parser.version>
+		<swagger-ui.version>4.1.3</swagger-ui.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- GeoJSON -> JTS -->
+		<dependency>
+			<groupId>org.wololo</groupId>
+			<artifactId>jts2geojson</artifactId>
+			<version>${jts2geojson.version}</version>
+		</dependency>
+
+		<!-- OpenAPI v3 -->
+		<dependency>
+			<groupId>io.swagger.parser.v3</groupId>
+			<artifactId>swagger-parser</artifactId>
+			<version>${swagger-parser.version}</version>
+		</dependency>
+		<!-- Swagger UI -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>swagger-ui</artifactId>
+			<version>${swagger-ui.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>${openapitools-jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<!-- Nodig voor openapi-generator https://github.com/OpenAPITools/openapi-generator/issues/8192 -->
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-swagger2.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<!--
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<!--
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>5.0.1</version>
+				<executions>
+					<execution>
+						<id>spring-boot-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<configOptions>
+								<basePackage>com.bsoft.ozon</basePackage>
+								<apiPackage>com.bsoft.ozon.api</apiPackage>
+								<invokerPackage>com.bsoft.ozon.api</invokerPackage>
+								<modelPackage>com.bsoft.ozon.model</modelPackage>
+								<configPackage>com.bsoft.ozon.configuration</configPackage>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<interfaceOnly>true</interfaceOnly>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<withXml>true</withXml>
+								<dateLibrary>java8</dateLibrary>
+								<library>spring-boot</library>
+								<skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
+								<java8>true</java8>
+								<useBeanValidation>true</useBeanValidation>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+-->
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapitools.version}</version>
+				<!--
+                Deze 2 dependencies zijn tijdelijke en kunnen weg zodra fix https://github.com/OpenAPITools/openapi-generator/pull/9650 gemerged is
+                De swagger parser versie die standaard meekomt met versie 5.1.1 van de openapi-generator bevat
+                een bug zie: https://github.com/OpenAPITools/openapi-generator/issues/8260
+                -->
+				<dependencies>
+					<dependency>
+						<groupId>io.swagger.parser.v3</groupId>
+						<artifactId>swagger-parser</artifactId>
+						<version>${swagger-parser.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-core</artifactId>
+						<version>${jackson-core.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<inputSpec>${project.basedir}/src/main/resources/apiv6.yaml</inputSpec>
+					<ignoreFileOverride>${project.basedir}/src/main/resources/.openapi-generator-ignore</ignoreFileOverride>
+					<generatorName>spring</generatorName>
+					<library>spring-boot</library>
+					<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+					<!-- template is nu nodig voor het zetten van het basepath in de selflinks. Kan dit niet anders? -->
+					<templateDirectory>${project.basedir}/src/main/resources/templates</templateDirectory>
+					<configOptions>
+						<dateLibrary>java8</dateLibrary>
+						<hateoas>true</hateoas>
+						<delegatePattern>true</delegatePattern>
+						<validateSpec>true</validateSpec>
+					</configOptions>
+					<importMappings>
+						Page=org.springframework.hateoas.PagedModel.PageMetadata,
+						HalCollectionLinks=org.springframework.hateoas.Links,
+						HalPaginationLinks=org.springframework.hateoas.Links,
+						GeoJsonGeometry=org.wololo.geojson.Geometry,
+						Point=org.wololo.geojson.Point,
+						MultiPoint=org.wololo.geojson.MultiPoint,
+						LineString=org.wololo.geojson.LineString,
+						MultiLineString=org.wololo.geojson.MultiLineString,
+						Polygon=org.wololo.geojson.Polygon,
+						MultiPolygon=org.wololo.geojson.MultiPolygon,
+						GeometryCollection=org.wololo.geojson.GeometryCollection,
+						Health=org.springframework.boot.actuate.health.Status,
+						<!--
+						Info=nl.kadaster.ozon.dockerinfo.InfoComponent,
+						-->
+						SelfLinks=org.springframework.hateoas.Links,
+						OmgevingsdocumentLinks=org.springframework.hateoas.Links,
+						RegelingLinks=org.springframework.hateoas.Links,
+						OmgevingsvergunningLinks=org.springframework.hateoas.Links,
+						DocumentComponentLinks=org.springframework.hateoas.Links,
+						RegeltekstLinks=org.springframework.hateoas.Links,
+						VastgesteldRegeltekstLinks=org.springframework.hateoas.Links,
+						OntwerpRegeltekstLinks=org.springframework.hateoas.Links,
+						DivisieLinks=org.springframework.hateoas.Links,
+						DivisietekstLinks=org.springframework.hateoas.Links,
+						TekstdeelLinks=org.springframework.hateoas.Links,
+						HoofdlijnLinks=org.springframework.hateoas.Links,
+						NormLinks=org.springframework.hateoas.Links,
+						NormwaardeLinks=org.springframework.hateoas.Links,
+						GebiedsaanwijzingLinks=org.springframework.hateoas.Links,
+						ActiviteitLinks=org.springframework.hateoas.Links,
+						ActiviteitLocatieaanduidingLinks=org.springframework.hateoas.Links,
+						PonsLinks=org.springframework.hateoas.Links,
+						KaartlaagLinks=org.springframework.hateoas.Links,
+						BevoegdGezagLinks=org.springframework.hateoas.Links,
+						OntwerpRegelingLinks=org.springframework.hateoas.Links,
+						OntwerpPonsLinks=org.springframework.hateoas.Links,
+						OntwerpGebiedsaanwijzingLinks=org.springframework.hateoas.Links,
+						OntwerpHoofdlijnLinks=org.springframework.hateoas.Links,
+						OntwerpDocumentComponentLinks=org.springframework.hateoas.Links,
+						OntwerpDivisieLinks=org.springframework.hateoas.Links,
+						OntwerpDivisietekstLinks=org.springframework.hateoas.Links,
+						OntwerpActiviteitlocatieaanduidingLinks=org.springframework.hateoas.Links,
+					</importMappings>
+				</configuration>
+				<executions>
+					<execution>
+						<id>spring-server-v6</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<apiPackage>nl.kadaster.ozon.afnamepunt.presenteren.v6.generated.api</apiPackage>
+							<modelPackage>nl.kadaster.ozon.afnamepunt.presenteren.v6.generated.model</modelPackage>
+							<inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+							<!-- template is nu nodig voor het zetten van het basepath in de selflinks. Kan dit niet anders? -->
+							<templateDirectory>${project.basedir}/src/main/resources/templates</templateDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

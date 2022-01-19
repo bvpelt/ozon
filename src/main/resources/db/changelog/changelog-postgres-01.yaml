@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 100
+      author: bart
+      dbms: PostgreSQL
+      comment: Create info
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: INFO
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: DESCRIPTION
+                  type: text
+
+        - rollback:
+            dropTable:
+              - tableName: INFO
